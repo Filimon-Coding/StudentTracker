@@ -1,23 +1,26 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 20px;
+    padding: 20px;
 }
 
-#form {
-    margin-bottom: 20px;
+h1 {
+    color: #333;
+}
+
+#form input {
+    padding: 5px;
+    margin: 5px;
+}
+
+#form button {
+    padding: 5px 10px;
 }
 
 #tasks {
     margin-top: 20px;
 }
 
-.task {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    display: inline-block;
-    background-color: #f9f9f9;
-    width: 200px;
-    text-align: left;
+button {
+    cursor: pointer;
 }

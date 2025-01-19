@@ -8,34 +8,19 @@ import static spark.Spark.*;
 public class TaskManagerSQL {
     static Connection conn;
 
-
     public static void main(String[] args) {
-
-        // Allow cross-origin requests
-        before((req, res) -> res.header("Access-Control-Allow-Origin", "*"));
-
-        options("/*", (req, res) -> {
-            String accessControlRequestHeaders = req.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
-                res.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-            }
-
-            String accessControlRequestMethod = req.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
-                res.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
-
-            return "OK";
-        });
-
-
         Gson gson = new Gson();
-        setupDatabase();
 
-        // Set the port for Spark to listen on
+        // Set the port before defining routes
         port(8080);
 
-        // GET /tasks - Retrieve all tasks
+        // Enable CORS (must be done before defining routes)
+        enableCORS();
+
+        // Initialize the database connection
+        setupDatabase();
+
+        // Define the routes
         get("/tasks", (req, res) -> {
             List<Map<String, String>> tasks = new ArrayList<>();
             try {
@@ -54,9 +39,7 @@ public class TaskManagerSQL {
             return gson.toJson(tasks);
         });
 
-        // POST /tasks - Add a new task
         post("/tasks", (req, res) -> {
-            System.out.println("POST /tasks called with body: " + req.body()); // Debug log
             Map<String, String> task = gson.fromJson(req.body(), Map.class);
             try {
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO tasks (name, deadline) VALUES (?, ?)");
@@ -68,11 +51,9 @@ public class TaskManagerSQL {
                 res.status(500);
                 return "Error adding task";
             }
-            res.status(200);
             return "Task added";
         });
 
-        // DELETE /tasks - Clear all tasks
         delete("/tasks", (req, res) -> {
             try {
                 Statement stmt = conn.createStatement();
@@ -92,5 +73,20 @@ public class TaskManagerSQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void enableCORS() {
+        before((req, res) -> res.header("Access-Control-Allow-Origin", "*"));
+        options("/*", (req, res) -> {
+            String headers = req.headers("Access-Control-Request-Headers");
+            if (headers != null) {
+                res.header("Access-Control-Allow-Headers", headers);
+            }
+            String method = req.headers("Access-Control-Request-Method");
+            if (method != null) {
+                res.header("Access-Control-Allow-Methods", method);
+            }
+            return "OK";
+        });
     }
 }
