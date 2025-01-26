@@ -1,5 +1,9 @@
 # StudentTracker
 
+Husk å lage configurer fil : Der skal du kunne konfiguere Task manger filen slik at automatiske kjører indeks samtidig. 
+
+
+
 StudentTracker is a project designed to help manage and organize student data efficiently. This system enables tracking student progress, managing course enrollments, and maintaining academic records.
 
 ---
