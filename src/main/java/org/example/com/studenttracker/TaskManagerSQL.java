@@ -90,3 +90,4 @@ public class TaskManagerSQL {
         });
     }
 }
+// Kommende endring på denne side blir : Dele task Manager SQl For det skal mer strukturert og tilgengjelige.

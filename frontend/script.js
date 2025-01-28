@@ -24,6 +24,7 @@ async function addTask() {
     if (!name || !deadline) {
         alert("Please fill out both fields!");
         return;
+
     }
 
     const response = await fetch(`${API_URL}/tasks`, {
