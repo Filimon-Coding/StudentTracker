@@ -74,3 +74,30 @@ This project is licensed under the [MIT License](LICENSE).
 For questions or suggestions, feel free to reach out:
 - **GitHub:** [Filimon-Coding](https://github.com/Filimon-Coding)
 - **Email:** filimon.nuguse20@gmail.com
+
+
+/* 
+Database task : from terminal testing ground 
+~/Documents/MinCodingLin/UtviklingAreaLin/StudentTracker$ sqlite3 tasks.db
+SQLite version 3.45.1 2024-01-30 16:01:20
+Enter ".help" for usage hints.
+sqlite> .tables
+tasks
+sqlite> .schema tasks 
+CREATE TABLE tasks (id INTEGER PRIMARY KEY, name TEXT, deadline TEXT);
+sqlite> select * from tasks; 
+1|bil|2025-01-21
+2|Jeg har ekamen 15000 |2025-01-30
+3|vcxvxcv|2025-01-29
+4|cvcvvcxvxcv|2025-01-29
+5|cvcvvcxvxcv|2025-01-29
+6|cvcvvcxvxcv|2025-01-29
+7|cvcvvcxvxcv|2025-01-29
+8|cvcvvcxvxcv|2025-01-29
+9|cvcvvcxvxcv|2025-01-29
+10|cvcvvcxvxcv|2025-01-29
+11|sdsad|2025-01-30
+sqlite> 
+
+
+*/
